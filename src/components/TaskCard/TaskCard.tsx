@@ -33,7 +33,7 @@ export default function TaskCard({ task }: Props) {
                 boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
             }}
         >
-            {/* Left: icon + text */}
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 <div style={{
                     width: 28,
@@ -75,7 +75,7 @@ export default function TaskCard({ task }: Props) {
                 </div>
             </div>
 
-            {/* Right: status badge */}
+
             <span style={{
                 fontSize: '12px',
                 fontWeight: 600,
