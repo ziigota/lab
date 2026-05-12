@@ -1,24 +1,27 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
+import { connection } from "next/server";
+
+async function DateContent() {
+    await connection();
+
+    const date = new Date().toISOString();
+
+    return (
+        <p style={dateStyle}>
+            {date}
+        </p>
+    );
+}
 
 export default function PostsPage() {
-    const [date, setDate] = useState("");
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setDate(new Date().toISOString());
-        }, 0);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     return (
         <div style={container}>
             <h2 style={title}>Posts</h2>
 
-            <p style={dateStyle}>{date}</p>
+            <Suspense fallback={<p>Loading...</p>}>
+                <DateContent />
+            </Suspense>
 
             <Link href="/posts/create" style={link}>
                 Create Post

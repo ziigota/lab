@@ -5,6 +5,7 @@ import {
     COOKIE_NAME,
     HEADER_NAME,
 } from "@/lib/i18n/config";
+const EXCLUDED_PATHS = ["/posts", "/posts/create"];
 
 export function proxy(request: NextRequest) {
     const search = request.nextUrl.search;
@@ -14,7 +15,12 @@ export function proxy(request: NextRequest) {
     const lang = request.cookies.has(COOKIE_NAME)
         ? request.cookies.get(COOKIE_NAME)!.value
         : FALLBACK_LANG;
-
+    const isExcluded = EXCLUDED_PATHS.some((path) =>
+        pathname.startsWith(path)
+    );
+    if (isExcluded) {
+        return NextResponse.next();
+    }
     const langParam = LANGUAGES.find((language: string) => {
         return pathname.startsWith(`/${language}`);
     });

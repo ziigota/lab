@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { createPost } from "./actions";
 
 type FormData = {
     title: string;
@@ -9,19 +9,15 @@ type FormData = {
 };
 
 export default function CreatePostPage() {
-    const router = useRouter();
     const { register, handleSubmit } = useForm<FormData>();
 
     const onSubmit = async (data: FormData) => {
-        await fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+        const formData = new FormData();
 
-        router.push("/posts");
+        formData.append("title", data.title);
+        formData.append("body", data.body);
+
+        await createPost(formData);
     };
 
     return (
@@ -29,8 +25,17 @@ export default function CreatePostPage() {
             <h2 style={title}>Create Post</h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input style={input} placeholder="Title" {...register("title")} />
-                <textarea style={textarea} placeholder="Body" {...register("body")} />
+                <input
+                    style={input}
+                    placeholder="Title"
+                    {...register("title")}
+                />
+
+                <textarea
+                    style={textarea}
+                    placeholder="Body"
+                    {...register("body")}
+                />
 
                 <button style={button} type="submit">
                     Create
@@ -62,16 +67,15 @@ const input = {
     background: "#fff",
 };
 
+const textarea = {
+    ...input,
+    minHeight: "100px",
+};
+
 const title = {
     textAlign: "center" as const,
     marginBottom: "20px",
     color: "#000",
-};
-
-
-const textarea = {
-    ...input,
-    minHeight: "100px",
 };
 
 const button = {
