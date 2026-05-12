@@ -1,0 +1,12 @@
+{
+  "title": "Home page",
+  "welcome": "Welcome!",
+  "button": {
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "greeting": "Hello, {{name}}! You are logged in as {{role}}.",
+  "items_count_one": "{{count}} item",
+  "items_count_other": "{{count}} items",
+  "terms_link": "By clicking you agree to the <lnk>terms</lnk> and <bold>policy</bold>"
+}

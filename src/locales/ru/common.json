@@ -1,0 +1,14 @@
+{
+  "title": "Главная страница",
+  "welcome": "Добро пожаловать!",
+  "button": {
+    "submit": "Отправить",
+    "cancel": "Отменить"
+  },
+  "greeting": "Привет, {{name}}! Ты вошёл как {{role}}.",
+
+  "items_count_one": "{{count}} товар",
+  "items_count_few": "{{count}} товара",
+  "items_count_many": "{{count}} товаров",
+  "terms_link": "Нажимая кнопку, вы соглашаетесь с <lnk>условиями</lnk> и <bold>политикой</bold>"
+}
